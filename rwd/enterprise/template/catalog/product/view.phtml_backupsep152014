@@ -1,0 +1,489 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<!-- code to load first simple product -->
+<script>
+var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+</script>
+<script type="text/javascript">
+
+function fireEvent(element,event)
+{
+    if (document.dispatchEvent)
+    {
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent(event, true, true );
+        return !element.dispatchEvent(evt);
+    }
+    else if (document.fireEvent)
+    {
+        // dispatch for IE
+        var evt = document.createEventObject();
+        return element.fireEvent('on'+event,evt);
+    }
+    else
+    {
+        // dispatch for firefox + others
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent(event, true, true );
+        return !element.dispatchEvent(evt);
+    }
+}
+
+function setDefaultConfigOptions()
+{
+    if (spConfigIndex >= spConfig.settings.length)
+    {
+        return; // stop
+    }
+    
+    spConfig.settings[spConfigIndex].selectedIndex = 1;
+    var obj = spConfig.settings[spConfigIndex];
+    
+    ++spConfigIndex;
+    
+    Event.observe(obj,'change',function(){});
+    fireEvent(obj,'change');
+}
+
+var spConfigIndex = 0;
+Event.observe(window, 'load', function() {
+              setDefaultConfigOptions();
+              }); 
+
+</script>
+<!-- end code to load first simple product -->
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script> 
+<div id="messages_product_view">
+	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+</div>
+<div class="product-view" itemscope itemtype="http://schema.org/Product">
+	<div class="product-essential">
+  	<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    	<?php echo $this->getBlockHtml('formkey') ?>
+      <div class="no-display">
+      	<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+      </div>
+      <div class="product-img-box">
+      	<div class="product-name">
+        	<h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>	
+        </div>
+        <?php echo $this->getChildHtml('media') ?>
+      </div>
+
+      <div class="product-shop">
+      	<div class="productInfoHeader">
+        	<div class="product-name">
+          	<h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            <?php if ($_product->getShortDescription()) {	
+			      	echo '<h2>' . $_product->getShortDescription() . '</h2>';
+			      } ?>
+			      <?php if ($_product->getDeviceType()) {	
+			      	echo '<h3>' . $_product->getDeviceType() . '</h3>';
+			      } ?>
+          </div> 
+           							
+          <div class="price-info" itemscope itemtype="http//schema.org/Offer">
+          	<span itemprop="price"><?php echo $this->getPriceHtml($_product); ?></span>
+            <?php echo $this->getChildHtml('bundle_prices') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+          </div>
+    
+          <div class="extra-info">
+          	
+          <!-- 	
+            <span itemprop="availability">
+            	<?php echo $this->getChildHtml('product_type_availability'); ?>
+            </span>	
+          -->  
+            
+            <?php echo $this->getReviewsSummaryHtml($_product, 'default', false)?>
+          </div>
+				</div>
+        <?php echo $this->getChildHtml('alert_urls') ?>
+
+        <?php if ($_product->getShortDescription()):?>
+        <div class="short-description" itemprop="description">
+        	<div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?> </div>
+        </div>
+        <?php endif;?>
+        
+        <?php if($_product->getExpansiveBlock()) { ?>
+        	<p id="scroll-learn">SCROLL DOWN TO LEARN MORE</p>	
+        <?php } ?> 
+
+       <hr id="br"><hr id="br">
+ 
+ 
+          <?php if ($_product->getSku()):?>
+	      	<div class="sku-holder">
+              <table style="font-size:13px !important;">
+              <tr>
+								<td style="font-weight: bold;">SKU: &nbsp;</td>
+                <td>
+                    <div class="std" itemprop="sku">
+                        <?php echo $_helper->productAttribute($_product, nl2br($_product->getSku()), 'sku') ?>
+                    </div>
+                </td>
+             </tr>
+             </table>
+	        </div>
+	      <?php endif;?>
+	      
+        <?php echo $this->getChildHtml('other');?>
+
+  			<?php if ($_product->isSaleable() && $this->hasOptions()):?> 
+        	<?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+  			<?php endif;?> 
+   
+				<!-- START LOWER HALF OF RIGHT PRODUCT DETAIL SECTION -->
+        <!-- ################################################ -->
+                
+				<div class="add-to-cart-wrapper">
+        	<?php echo $this->getChildHtml('product_type_data') ?>
+          <?php echo $this->getChildHtml('extrahint') ?>
+    
+          <?php if (!$this->hasOptions()):?>
+	          <div class="add-to-box">
+	          	<?php if($_product->isSaleable()): ?>
+	            	<?php echo $this->getChildHtml('addtocart') ?>
+	              <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+	              	<span class="or"><?php echo $this->__('OR') ?></span>
+	              <?php endif; ?>
+	          	<?php endif; ?>
+	          
+	          	<?php echo $this->getChildHtml('addto') ?>
+	          	<?php echo $this->getChildHtml('sharing') ?>
+	          </div>
+	          
+	          <?php echo $this->getChildHtml('extra_buttons') ?>
+	          <?php elseif (!$_product->isSaleable()): ?>
+	          <div class="add-to-box">
+	          	<?php echo $this->getChildHtml('addto') ?>
+	            <?php echo $this->getChildHtml('sharing') ?>
+	          </div>
+          <?php endif; ?>
+        </div>
+
+        <?php echo $this->getChildHtml('related_products') ?>
+
+        <div class="clearer"></div>
+        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+        	<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+      </form> 
+      <script type="text/javascript">
+      //<![CDATA[
+      	var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+        	if (this.validator.validate()) {
+          	var form = this.form;
+            var oldUrl = form.action;
+    
+            if (url) {
+            	form.action = url;
+            }
+            var e = null;
+            try {
+              this.form.submit();
+            } catch (e) {
+          }
+          
+          this.form.action = oldUrl;
+          	if (e) {
+            	throw e;
+            }
+    
+            if (button && button != 'undefined') {
+            	button.disabled = true;
+            }
+          }
+        }.bind(productAddToCartForm);
+    
+        productAddToCartForm.submitLight = function(button, url){
+        	if(this.validator) {
+          	var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            // Remove custom datetime validators
+            for (var methodName in Validation.methods) {
+            	if (methodName.match(/^validate-datetime-.*/i)) {
+              	delete Validation.methods[methodName];
+              }
+            }
+    
+            if (this.validator.validate()) {
+            	if (url) {
+              	this.form.action = url;
+              }
+            	this.form.submit();
+            }
+          	Object.extend(Validation.methods, nv);
+          }
+        }.bind(productAddToCartForm);
+      //]]>
+      </script>
+            
+      <!-- SOCIAL ICONS -->
+      <!-- ############ -->
+      
+      <div class="product-sm">
+				<?php $productName = $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+				<?php $productUrl = $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>
+				<?php $productImage = $_product->getImageUrl() ?>
+				<?php $productDeviceType = $_helper->productAttribute($_product, $_product->getDeviceType(), 'device_type'); ?>
+						
+				<!-- FACEBOOK -->
+				<a href="javascript:popWin('https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($productUrl); ?>&t=<?php echo urlencode("Incipio" . $productName . $productDeviceType); ?>', 'facebook', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Facebook') ?>"><i class="fa fa-facebook"></i> Facebook</a>
+						
+				<!-- TWITTER -->
+				<a href="javascript:popWin('http://twitter.com/home/?status=<?php echo urlencode($productName . ' (' . $productUrl . ')'); ?>', 'twitter', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Tweet') ?>"><i class="fa fa-twitter"></i> Twitter </a>
+						
+				<!-- PINTEREST -->
+				<a href="javascript:popWin('https://pinterest.com/pin/create/button/?url=<?php echo urlencode($productUrl); ?>&media=<?php echo urlencode($productImage); ?>&description=<?php echo urlencode($productName); ?>', 'pinterest', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Pin it') ?>"><i class="fa fa-pinterest"></i> Pinterest</a>
+
+        <!-- GOOGLE PLUS -->
+        <a href="javascript:popWin('https://plus.google.com/share?url=<?php echo urlencode($productUrl); ?>', 'google', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Google Plus') ?>"><i class="fa fa-google-plus"></i> Google Plus</a>
+        	
+      </div>
+      <!-- END SOCIAL ICONS -->
+
+      </div> 
+       
+    </div><!-- end right sectionnnnnn--> 
+    <hr id="br"><hr id="br">
+    
+    <!-- EXPANSIVE BLOCK -->
+    <div id="expansive-container">
+  	<?php
+  		if($_product->getExpansiveBlock()) {
+  			echo $_product->getExpansiveBlock();
+  		}	
+    ?>
+  </div>
+    <!-- END EXPANSIVE BLOCK -->
+
+		<?php 
+			$p_length = $_product->getLength();
+			$p_thickness = $_product->getThickness();
+			$p_width = $_product->getWidth();
+			$p_weight = round($_product->getWeight(),2);
+			$p_depth = $_product->getDepth();
+		?>
+
+    <div class="product-collateral toggle-content tabs">
+    	<dl id="collateral-tabs" class="collateral-tabs">
+		<?php 
+			
+			$featureBullets = array();
+				
+			if($_product->getFeatureOne())   {$featureBullets[0] = $_product->getFeatureOne();}
+			if($_product->getFeatureTwo())   {$featureBullets[1] = $_product->getFeatureTwo();}
+			if($_product->getFeatureThree()) {$featureBullets[2] = $_product->getFeatureThree();}
+			if($_product->getFeatureFour())  {$featureBullets[3] = $_product->getFeatureFour();}
+			if($_product->getFeatureFive())  {$featureBullets[4] = $_product->getFeatureFive();}
+			
+		?>	
+			
+    	
+    	<?php if($_product->getCalloutImage() || $_product->getNewCallout() || $featureBullets) { ?>		
+    		<dt class="tab"><span>FEATURES</span></dt>
+				<dd class="tab-container first">
+					<div class="tab-content">
+					
+					<!-- ### CHECK FOR NEW CALLOUT IMAGE AND BULLETS ### -->
+					<?php if($_product->getNewCallout() && $featureBullets) { ?>
+					
+						<!-- ### FEATURED CALLOUT CONTAINER ### -->
+						<div class="featured-callout">
+
+							<!-- ### FEATURED CALLOUT TEXT ### -->							
+							<div class="featured-callout-text">
+								<ol>
+									
+										<?php 
+											foreach($featureBullets as $bullet) {
+												echo '<li style="list-style-type: decimal;">' . $bullet . '</li>';	
+											}					
+										?>
+									
+								</ol>
+							</div>							
+							<!-- END FEATURED CALLOUT TEXT -->
+							
+							<!-- ############################## -->
+							<!-- ### FEATURED CALLOUT IMAGE ### -->
+							<!-- ############################## -->
+						<div class="featured-callout-image">
+							<img src="<?php echo $_product->getNewCallout(); ?>" alt="<?php echo $_product->getShortDescription() . " " . $_product->getDeviceType(); ?>" />
+						</div>
+						<!-- END FEATURED CALLOUT IMAGE -->
+							
+					</div> 
+					<!-- END FEATURED CALLOUT CONTAINER --> 
+					
+					<!-- FEATURED BULLETS ONLY -->
+					<?php } elseif ($featureBullets) { ?>
+						
+						<!-- ### FEATURED CALLOUT CONTAINER ### -->
+						<div class="featured-callout">
+
+							<!-- ### FEATURED CALLOUT TEXT ### -->							
+							<div class="featured-callout-text" style="margin: 0 auto; width:40%; float:none !important;">
+								<ol>
+									
+										<?php 
+											foreach($featureBullets as $bullet) {
+												echo '<li style="list-style-type: decimal;">' . $bullet . '</li>';	
+											}					
+										?>
+									
+								</ol>
+							</div>
+						</div>	
+						<!-- END FEATURED BULLETS ONLY -->
+						
+					<?php } else { ?>
+								
+						<img style="margin: 0 auto;float:none;" src="<?php echo $_product->getCalloutImage(); ?>" alt="" />
+														
+					<?php } ?>  
+						
+				</div>
+			</dd>	
+
+			<?php } ?>
+			<!-- END CHECK FOR FEATURED TAB --> 	
+    	
+    		<!-- ADD SPECS SECTION -->
+        <dt class="tab"><span>Tech Specs</span></dt>
+        <dd class="tab-container">
+          <div id="tech_specs" class="tab-content">
+            
+            <?php if($p_length || $p_thickness || $p_width || $p_depth || $p_weight) { ?>
+            	<p>Measurements:</p>
+            <?php } ?>	
+            <ul>
+              <li style="display: inline-block; margin-right:5%;">
+		            <ul>
+					      	<?php if($p_length) { ?>
+						      <li itemtype=""> 
+						        	<?php echo "Length: <b>" . $p_length . "</b> in (" . ($p_length * 25.4) . " mm)"; ?>					
+						      </li>	
+						      <?php } ?>	
+						                
+						      <?php if($p_thickness) {  ?>
+						      <li>
+						      	<?php echo "Thickness: <b>" . $p_thickness . "</b> in (" . ($p_thickness * 25.4) . " mm)"; ?>					                							
+						      </li>
+						      <?php } ?>
+						                
+						      <?php if($p_width) {  ?>	
+						      <li>
+						      	<span itemprop="width">
+						      		<?php echo "Width: <b>" . $p_width . "</b> in (" . ($p_width * 25.4) . " mm)"; ?>	
+						      	</span>						
+						      </li>
+						      <?php } ?>	
+						                
+						      <?php if($p_depth) {  ?>	
+						      <li>
+						      	<span itemprop="depth">
+						        	<?php echo "Depth: <b>" . $p_depth . "</b> in (" . ($p_depth * 25.4) . " mm)"; ?>		
+						        </span>					
+						      </li>
+					        <?php } ?>	
+					                	
+					        <?php if($p_weight) {  ?>
+						      <li>
+						      	<span itemprop="weight">
+						      		<?php echo "Weight: <b>" . $p_weight . "</b> lb(s) (" . ($p_weight * 16) . " oz)"; ?>
+						      	</span>	
+						      </li>
+					        <?php } ?>
+				        </ul>
+			        </li>
+			        
+			        
+			        <li style="display: inline-block; margin-right:5%;">			        	
+				        <?php if($_product->getWarranty()) { ?>
+				        
+					        <?php if(!$p_length && !$p_thickness && !$p_width && !$p_depth && !$p_weight) { ?>
+					       		<img class="alone" id="warranty" src="<?php echo $_product->getWarranty(); ?>" alt="Incipio One Year Warranty" />
+					       	<?php } else { ?>	
+				       			<img id="warranty" src="<?php echo $_product->getWarranty(); ?>" alt="Incipio One Year Warranty" />
+				       		<?php } ?>
+				       		
+				       	<?php } else { ?>
+				       	
+				       		<?php if(!$p_length && !$p_thickness && !$p_width && !$p_depth && !$p_weight) { ?>
+					       		<img class="alone" id="warranty" src="http://www.incipio.com/images/Guarantee_Life.png"	alt="Incipio Lifetime Warranty" />
+					       	<?php } else { ?>	
+				       			<img id="warranty" src="http://www.incipio.com/images/Guarantee_Life.png"	alt="Incipio Lifetime Warranty" />
+				       		<?php } ?>
+				       	
+				        <?php } ?>			        	
+			        </li>	
+			       
+			       	                	
+			      </ul>		
+          </div>
+        </dd>
+        <!-- END SPECS SECTION -->
+                    
+        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+        	<?php foreach ($detailedInfoGroup as $alias => $html):?>
+          <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span></dt>
+          <dd class="tab-container">
+          	<div class="tab-content">
+          		<?php echo $html ?>
+          	</div>
+          </dd>
+        	<?php endforeach;?>         
+      </dl>
+    	<?php endif; ?>
+    </div>
+
+    <?php echo $this->getChildHtml('upsell_products') ?>
+    <?php echo $this->getChildHtml('product_additional_data') ?>
+
+
+	</div>

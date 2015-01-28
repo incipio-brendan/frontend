@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<!-- SLIDER + HOMEPAGE CSS ADDITION -->
+  <action method="addItem"><type>skin_css</type><name>css/nivo-slider.css</name></action>
+	<action method="addItem"><type>skin_css</type><name>css/home_page.css</name></action>
+	<action method="addItem"><type>skin_js</type><name>js/jquery.nivo.slider.js</name></action>
+	<!-- END SLIDER + HOMEPAGE ADDITIONS -->
+
+</layout>

@@ -1,0 +1,434 @@
+<?php
+    if($_GET['submitted'] == "YES")
+    echo '<script>alert("Thank you for your RMA submission. A representative will be in contact with you as soon as we have processed your request.");</script>';
+?>
+
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  margin-top: 10px;
+  -moz-user-select: auto;
+}
+html .login-wrap {
+  position: relative;
+  margin: 0 auto;
+  background: #ecf0f1;
+  width: 100%;
+  border-radius: 5px; 
+  padding: 15px;
+  display: block;
+  top: 10px;
+}
+html .login-wrap h2 {
+  text-align: center;
+  font-weight: 200;
+  font-size: 2em;
+  margin-top: 10px;
+  color: #34495e;
+}
+html .login-wrap .form {
+  padding-top: 20px;
+}
+html .login-wrap .form input[type="text"],
+html .login-wrap .form input[type="password"],
+html .login-wrap .form button {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 25px;
+  height: 40px;
+  border-radius: 5px;
+  outline: 0;
+  -moz-outline-style: none;
+}
+html .login-wrap .form input[type="text"],
+html .login-wrap .form input[type="password"] {
+  border: 1px solid #bbb;
+  padding: 0 0 0 10px;
+  font-size: 14px;
+}
+html .login-wrap .form input[type="text"]:focus,
+html .login-wrap .form input[type="password"]:focus  {
+  border: 1px solid #3498db;
+}
+
+
+textarea {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 25px; 
+  border-radius: 5px;
+  outline: 0;
+  -moz-outline-style: none;
+}
+textarea {
+  border: 1px solid #bbb;
+  padding: 0 0 0 10px;
+  font-size: 14px;
+}
+textarea:focus {
+  border: 1px solid #3498db;
+}
+
+
+input[type="radio"] {
+ 	margin-left: 5%;
+}
+select { 
+    margin-left: 5%;
+}
+input[type="checkbox"], input[type="radio"] {
+    margin-left: 5%;
+}
+
+
+html .login-wrap .form a {
+  text-align: center;
+  font-size: 10px;
+  color: #3498db;
+}
+html .login-wrap .form a p {
+  padding-bottom: 10px;
+}
+html .login-wrap .form button {
+  background: #e74c3c;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 200;
+  cursor: pointer;
+  transition: box-shadow .4s ease;
+}
+
+html .login-wrap .form button:hover {
+  box-shadow: 1px 1px 5px #555;
+}
+
+html .login-wrap .form button:active {
+  box-shadow: 1px 1px 7px #222;
+}
+
+html .login-wrap:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #00AEEF ;
+
+  background: #00AEEF ;
+  height: 5px;
+  border-radius: 5px 5px 0 0;
+}
+
+label {
+	padding-left:5%;
+	margin-bottom: 5px;
+	display: block;
+}
+ .page-title, .page h1 {
+ 	display: none!important;
+ }
+.rowClear {
+	margin: 20px 0;
+	width: 100%; 
+	position: relative;
+}
+.login-wrap input[type="submit"] {
+	margin-left:5%;  
+position: relative;
+  vertical-align: top;
+  width: 90%;
+  height: 60px;
+  padding: 0;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #00AEEF;
+  border: 0;
+  border-bottom: 2px solid #555;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #555;
+  box-shadow: inset 0 -2px #555;
+}
+#reason {
+	width:15%;
+}
+</style>
+
+<script>
+function checkform (form)
+{
+    
+    var choosen = "";
+    var len = form.typeOfClaim.length;
+    for (i = 0; i <len; i++) {
+        if (form.typeOfClaim[i].checked) {
+            choosen = form.typeOfClaim[i].value;
+        }
+    }
+    
+    var loc = "";
+    var len2 = form.purchase.length;
+    for (i = 0; i <len2; i++) {
+        if (form.purchase[i].checked) {
+            loc = form.purchase[i].value;
+        }
+    }
+    
+    var strvalue = form.captcha.value;
+    
+    if (form.z_name.value == "") {
+        alert( "Please enter your name" );
+        form.z_name.focus();
+        return false;
+    }
+    
+    else if (form.z_requester.value.length < 5) {
+        alert( "Please enter a valid email address" );
+        form.z_requester.focus();
+        return false;
+    }
+    
+    else if (form.phonenumber.value == "") {
+        alert( "Please enter your phone number" );
+        form.phonenumber.focus();
+        return false;
+    }
+    
+    else if (form.sku.value == "") {
+        alert( "Please enter an Item Number" );
+        form.sku.focus();
+        return false;
+    }
+    
+    else if (form.description.value == "") {
+        alert( "Please enter description" );
+        form.description.focus();
+        return false;
+    }
+    
+    else if (loc == "") {
+        alert( "Please select purchase location" );
+        return false;
+    }
+    
+    else if (form.ordernumber.value == "") {
+        if(loc == "incipio")
+            alert( "Please enter your order number" );
+        else
+            alert( "Please enter place of order" );
+        form.ordernumber.focus();
+        return false;
+    }
+    
+    else if (choosen == "") {
+        alert( "Please select a type of claim" );
+        return false;
+    }
+    
+    else if (form.reason.value == "") {
+        alert( "Please select a reason" );
+        form.reason.focus();
+        return false;
+    }
+    
+    else if (form.returnaddress.value == "") {
+        alert( "Please enter return address" );
+        form.returnaddress.focus();
+        return false;
+    }
+    
+    else if (!form.Initial.checked) {
+        alert( "Please agree to the terms and conditions" );
+        form.Initial.focus();
+        return false;
+    }
+
+    else if (strvalue.toLowerCase() != "white")
+    {
+        alert( "Please enter 'White' as the color" );
+        form.captcha.focus();
+        return false;
+        
+    }
+    else
+    {
+         return true;
+    }
+    
+    return false;   
+}
+
+function showordernumbertextfield(store)
+{
+    var ordernumberhtml;
+    if(store == "incipio")
+    {
+        ordernumberhtml = "<label class='orderNumber' for='orderNumber'>Incipio.com Order Number</label><br>";
+        ordernumberhtml = ordernumberhtml + "<input name='ordernumber' type='text' placeholder='Order Number ' id='ordernumber' />";
+    }
+    else
+    {
+        ordernumberhtml = "<label class='orderNumber' for='orderNumber'>Place of Purchase</label><br>";
+        ordernumberhtml = ordernumberhtml + "<input name='ordernumber' type='text' placeholder='Place of Purchase' id='ordernumber' />";
+    }
+    document.getElementById('ordernumberdiv').innerHTML = ordernumberhtml;
+}
+
+function showreasons(claim)
+{
+    var reasonhtml;
+    if(claim == "Warranty")
+    {
+        reasonhtml = "<label>Reason</label><br>";
+        reasonhtml = reasonhtml + "<select name='reason' id='reason'>";
+        reasonhtml = reasonhtml + "<option value='' selected=''>Please select one</option>";
+        reasonhtml = reasonhtml + "<option value='broken_product'>Broken Product</option>";
+        reasonhtml = reasonhtml + "<option value='different_color'>Different Color</option>";
+        reasonhtml = reasonhtml + "<option value='discolored'>Discolored</option>";
+        reasonhtml = reasonhtml + "<option value='wrong_case'>Wrong Case</option>";
+        reasonhtml = reasonhtml + "</select>";
+        
+        reasonhtml = reasonhtml + "<div style='margin-top:10px;'><label class='returnaddress' for='returnaddress'>Return Address</label><br>";
+        reasonhtml = reasonhtml + "<textarea name='returnaddress' id='returnaddress'></textarea></div>";
+        
+    }
+    else
+    {
+        reasonhtml = "<label>Reason</label><br>";
+        reasonhtml = reasonhtml + "<select name='reason' id='reason'>";
+        reasonhtml = reasonhtml + "<option value='' selected=''>Please select one</option>";
+        reasonhtml = reasonhtml + "<option value='did_not_like_it'>Did not like it</option>";
+        reasonhtml = reasonhtml + "<option value='dissatisfied_with_fit_design'>Dissatisfied with Fit/Design</option>";
+        reasonhtml = reasonhtml + "<option value='returned_phone'>Returned phone</option>";
+        reasonhtml = reasonhtml + "<option value='wasn_t_as_expected'>Wasn’t as expected</option>";
+        reasonhtml = reasonhtml + "</select>";
+        
+        reasonhtml = reasonhtml + "<div style='margin-top:10px;'><label class='returnaddress' for='returnaddress'>Return Address</label><br>";
+        reasonhtml = reasonhtml + "<textarea name='returnaddress' id='returnaddress'></textarea></div>";
+    }
+    document.getElementById('reasondiv').innerHTML = reasonhtml;
+    
+}
+
+</script>
+
+<form class="login-wrap" id="zFormer" method="POST" action="/rma/former.php" name="former" onsubmit="return checkform(this);">
+  <h2>Warranty exchange</h2>
+  
+  <div class="form">
+    <label class="name" for="z_name">Name</label>
+		<input name="z_name" type="text" placeholder="Name" id="name" />
+
+		<label class="email" for="z_requester">Email</label>
+		<input name="z_requester" type="text"  id="email" placeholder="Email" />
+
+		<label class="phone" for="Phone">Phone </label>
+		<input name="phonenumber" type="text"  id="phone" placeholder="Phone Number" />
+
+        <label class="itemSKU" for="itemSKU">Item SKU</label>
+		<input name="sku" type="text" placeholder="Item SKU" id="itemSKU" />
+
+		<label class="captcha" for="captcha">Spam Check: What color is snow? (Answer is White)</label>
+		<input name="captcha" type="text"  id="captcha" placeholder="Captcha" />
+ 
+		<label class="description" for="description ">Description  </label>
+		<textarea name="z_description" id="description" placeholder="Description " rows="4" cols="50"></textarea>
+	
+		<label for="purchasedAt">Purchased At</label> 
+		<input type="radio" name="purchase" id="purchase" value="incipio" onClick="showordernumbertextfield(this.value);">Incipio.com<br>
+		<input type="radio" name="purchase" id="purchase" value="other" onClick="showordernumbertextfield(this.value);">Other
+
+        <div class="rowClear">
+            <div id="ordernumberdiv">
+
+            </div>
+        </div>
+
+        <div class="rowClear">
+            <label>Type Of Claim</label>
+			<input type="radio" name="typeOfClaim" id="typeOfClaim" value="Warranty" onClick="showreasons(this.value);">Warranty exchange request<br>
+			<input type="radio" name="typeOfClaim" id="typeOfClaim" value="Return" onClick="showreasons(this.value);">Return Request
+		</div>
+
+        <div class="rowClear">
+            <div id="reasondiv">
+            </div>
+        </div>
+
+		<div class="rowClear">
+			<label for="datepurchased">Date Purchased</label>
+            <select id="monthdropdown" name="monthdropdown">
+            </select>
+            <select id="daydropdown" name="daydropdown">
+            </select>
+            <select id="yeardropdown" name="yeardropdown">
+            </select>
+		</div>
+		
+		<div class="rowClear" style="display:none;">
+        <label>Upload file Attachments</label><br><br>
+        <label>
+       <input type="file" multiple name="ticket-attachments[]" style="font-size: 13px;font-family: 'Roboto Condensed', arial, sans-serif;font-weight: 600;"/>
+        </label>
+		</div>
+		
+		<div class="rowClear">
+			<label for="understand" style="font-weight: bold;">I have read and understand the above Warranty/Return Policy.</label> 
+			<input type="checkbox" name="Initial" id="Initial" value="userConfirmation">
+		</div>
+
+        <div class="submit">
+	      <input type="submit" value="SEND" id="submit"/> 
+	    </div>
+
+  </div>
+</form>
+ 
+
+
+<script type="text/javascript">
+
+/***********************************************
+* Drop Down Date select script- by JavaScriptKit.com
+* This notice MUST stay intact for use
+* Visit JavaScript Kit at http://www.javascriptkit.com/ for this script and more
+***********************************************/
+
+var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+
+function populatedropdown(dayfield, monthfield, yearfield){
+var today=new Date()
+var dayfield=document.getElementById(dayfield)
+var monthfield=document.getElementById(monthfield)
+var yearfield=document.getElementById(yearfield)
+for (var i=0; i<31; i++)
+dayfield.options[i]=new Option(i, i+1)
+dayfield.options[today.getDate()]=new Option(today.getDate(), today.getDate(), true, true) //select today's day
+for (var m=0; m<12; m++)
+monthfield.options[m]=new Option(monthtext[m], monthtext[m])
+monthfield.options[today.getMonth()]=new Option(monthtext[today.getMonth()], monthtext[today.getMonth()], true, true) //select today's month
+var thisyear=today.getFullYear() - 8;
+for (var y=0; y<8; y++){
+yearfield.options[y]=new Option(thisyear, thisyear)
+thisyear+=1
+}
+yearfield.options[8]=new Option(today.getFullYear(), today.getFullYear(), true, true) //select today's year
+}
+
+</script>
+
+<script type="text/javascript">
+
+//populatedropdown(id_of_day_select, id_of_month_select, id_of_year_select)
+window.onload=function(){
+populatedropdown("daydropdown", "monthdropdown", "yeardropdown")
+}
+</script>

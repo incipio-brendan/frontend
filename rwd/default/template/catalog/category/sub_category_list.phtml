@@ -1,0 +1,52 @@
+
+<?php
+	$_categories=$this->getCurrentChildCategories();
+	
+	if(count($_categories)):
+		$categorycount = 0;
+		$i=0;
+?>
+	<ul class="products-grid products-grid--max-4-col first last odd">
+		<?php
+			foreach ($_categories as $_category):
+				$products = Mage::getModel('catalog/category')->load($_category->getId())
+	      																							->getProductCollection()
+	        																						->addAttributeToSelect('entity_id');
+	        
+				$productcount =  $products->count();
+	
+				if($_category->getIsActive() && $productcount > 0):
+				$cur_category=Mage::getModel('catalog/category')->load($_category->getId());
+				$layer = Mage::getSingleton('catalog/layer');
+				$layer->setCurrentCategory($cur_category);
+				$catName = $this->getCurrentCategory()->getName();
+		?>
+	
+		<li class="item last">
+			<a class="subcat-device-link" href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>">
+				<img id="sub-cat-listing-image" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'media/catalog/category/'.$this->getCurrentCategory()->getThumbnail() ?>" data-original="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'media/catalog/category/'.$this->getCurrentCategory()->getThumbnail() ?>" alt="<?php echo $this->htmlEscape($_category->getName()) ?>" />
+			</a>
+	            
+	    <div id="subcat-productname" style="width:200px;text-align:center;">
+	    	<a class="subcat-device-link" href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>">
+	      	<h2 class="product-name-device-listing">
+	        	<?php echo $this->htmlEscape($_category->getName()) ?>
+	        </h2>	
+	      </a>
+			</div>
+		</li>	
+			
+		<?php
+			endif;
+			if($categorycount == 3) {
+				$categorycount = 0;
+			} else {
+				$categorycount++;
+			}
+			
+			$i++;
+			endforeach;
+			
+			endif;
+		?>
+	</ul>

@@ -1,0 +1,90 @@
+ 
+    <link rel="stylesheet" href="http://dev.incipio.com/skin/frontend/rwd/default/css/splash.css"> 
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+     <!-- END GOOGLE FONTS ADDITION -->
+
+  <video autoplay="" loop="" poster="http://www.incipio.com/images/homepage/d.jpg" id="bgvid">
+    <source src="http://www.incipio.com/media/videos/hv.mp4" type="video/mp4">
+	<source src="http://www.incipio.com/media/videos/hv.webm" type="video/webm">
+    <source src="http://www.incipio.com/media/videos/hv.ogg" type="video/ogg">
+  </video>
+ 
+  <div class="splashWrapper" onclick="location.href='http://www.incipio.com/shop'">
+  <div id="bg"></div>
+    <div id="overlay">
+        <a href="/shop" class="desk"><img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/logoSplashWhite.png"></a>
+        <a href="/shop" class="mob"><img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/logoSplash.png"></a>
+        
+        <ul id="nav">
+            <li><a href="/shop" style="color:white;">SHOP</a></li>
+            <li><a href="http://youtube.com/incipiotv" style="color:white;">VIDEOS</a></li>
+            <li><a href="http://blog.incipio.com" style="color:white;">BLOG</a></li>
+        </ul>
+        <ul id="sm">
+            <li><a href="https://www.facebook.com/incipio" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/myincipio" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="http://www.youtube.com/user/IncipioTV" target="_blank"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="http://www.pinterest.com/incipio/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="http://instagram.com/incipio#" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>  
+
+ 
+ <style>
+
+
+@media all and (max-width: 800px)  {
+
+    #bg {
+        width:100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        background-image: url('http://www.incipio.com/images/homepage/m.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 9999999999;
+    }
+
+    video {
+        display: none!important;
+    }
+}
+
+@media screen and (min-width: 800px) {
+
+    #bg {
+        display: none!important;
+    }
+}
+
+
+
+.std ul { 
+    margin-bottom: !important;
+}
+
+
+
+   video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background-size: cover;
+  }
+
+.std ul {
+    list-style: disc outside none;
+    margin-bottom: 0!important;
+}
+.std p {
+    margin: 0px 0px 0em!important;
+}
+
+
+</style>

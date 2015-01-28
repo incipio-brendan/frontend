@@ -1,0 +1,391 @@
+    <!-- HOMEPAGE + SLIDER ADDITION -->
+    <script src="http://www.incipio.com/skin/frontend/rwd/default/js/jquery.nivo.slider.js"></script>
+  
+
+    <!-- HOME PAGE STYLES ONLY -->          
+	  <link href="skin/frontend/rwd/default/css/home_page.css" rel="stylesheet" type="text/css">
+      
+
+    <!-- pop up dialog NEWSLETTER -->  
+    <script src="skin/frontend/rwd/default/js/jquery.lightbox_me.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="skin/frontend/rwd/default/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script> 
+
+
+    <script type="text/javascript" charset="utf-8"> 
+     jQuery(document).ready(function () {
+       if (!jQuery.cookie('popUp'))
+          { 
+
+            jQuery(function() {
+                function launch() {
+                     jQuery('#sign_up').lightbox_me({centered: true, onLoad: function() { jQuery('#sign_up').find('input:first').focus()}});
+                } 
+                jQuery(document).ready(function() {
+                      jQuery("#sign_up").lightbox_me({centered: true, preventScroll: true, onLoad: function() {
+                      jQuery("#sign_up").find("input:first").focus();
+                  }}); 
+                }); 
+            });
+            jQuery.cookie('popUp', "1", {expires: 30});
+          }
+     });
+ 
+    </script>
+
+    <div id="sign_up" style="display:none;"> 
+       <input type="email"><input type="submit" value="submit">
+    </div>
+     
+
+
+
+
+
+	  <!-- INITIALIZE SLIDER -->     
+ 	  <script type="text/javascript" src="nivo/jquery.nivo.slider.js"></script>
+      <script type="text/javascript">
+      	jQuery(window).load(function() {
+        jQuery('#slider').nivoSlider();
+        });
+    </script>
+    <!-- END INITIALIZE SLIDER -->
+    	
+    	 
+      
+      <!-- ###################### --> 
+      <!-- BEGIN SLIDER CONTAINER -->  
+      <!-- ###################### -->  
+       
+      <div class="slider-wrapper theme-default">
+       	<div id="slider" class="nivoSlider">  
+       		   
+       		<!-- SLIDE 1 -->
+        	<a href="#">
+        		<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/focal-camera-case.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/focal-camera-case.jpg" alt="" data-transition="fade" />
+        	</a>  
+        	
+        	<!-- SLIDE 2 -->      
+          <a href="#">
+          	<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/edge-chrome-case.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/edge-chrome-case.jpg" alt="" data-transition="fade" />
+          </a> 
+          
+          <!-- SLIDE 3 -->
+          <a href="#">
+          	<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/iPhone-5s-Offgrid-Banner.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/iPhone-5s-Offgrid-Banner.jpg" alt="" data-transition="fade" />
+          </a> 
+          
+          <!-- SLIDE 4 -->
+          <a href="#">
+          	<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/Invert-Universal-Tablet-Folio-Banner.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/Invert-Universal-Tablet-Folio-Banner.jpg" alt="" data-transition="fade" />
+          </a> 
+          	
+          <!-- SLIDE 5 -->	
+          <a href="#">
+          	<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/iPhone-5-offGRID-Rugged-Battery-Case-Banner.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/iPhone-5-offGRID-Rugged-Battery-Case-Banner.jpg" alt="" data-transition="fade" />
+          </a>
+          
+          <!-- SLIDE 6 -->
+          <a href="#">
+          	<img class="slider_banner" src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/desktop/Summer-Lookbook-Banner.jpg" data-thumb="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/phone/Summer-Lookbook-Banner.jpg" alt="" data-transition="fade" />
+          </a>
+              
+        </div>
+      </div>
+ 	  <!-- END SLIDER CONTAINER -->
+ 			
+ 			
+			
+			<!-- ################### -->	
+			<!-- BEGIN PROMO CALLOUT -->
+			<!-- ################### -->
+			
+      <div id="promotion"> 
+      	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/arrow.png" />
+        	<div class="container">
+        		<h3>SAVE ON SUMMER DEALS.</h3>
+           	<p>CLICK HERE TO FIND OUT HOW TO GET 10% OFF ALL SUMMER TIME ITEMS.</p>
+          </div>
+      </div>
+      <!-- END PROMO CALLOUT -->
+      
+      
+      
+      <!-- ####################### -->  
+      <!-- BEGIN FEATURED PRODUCTS -->
+      <!-- ####################### --> 
+       
+      <section id="featured">
+      	<div class="container grid4">
+        	<h2><span>Featured Items</span></h2>
+                
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/cases/iphone-cases/iphone-5s-cases.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_iPhone5s-ChromeEdge.jpg" alt="Incipio iPhone 5S Cases" /> 
+            	<h4>iPhone 5S Cases</h4>
+            </a>
+          </div>
+          
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/cases/samsung-smartphone-cases-accessories/samsung-galaxy-s5.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_GS5-Rival.jpg" alt="Incipio Galaxy S5 Cases" /> 
+            	<h4>Galaxy S5 Cases</h4>
+            </a>
+          </div>
+          
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/cases/iphone-cases/iphone-5c-cases.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_iPhone5c-Frost-NGP.jpg" alt="Incipio iPhone 5c Cases" /> 
+            	<h4>iPhone 5c Cases</h4>
+            </a>
+          </div>
+          
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/chargers/power-solutions-for-apple/iphone-power-solutions/charge-sync-lightning-connector-cable.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_lightningCable.jpg" alt="Incipio Lightning Charging Cables" /> 
+            	<h4>Lightning Charge / Sync Cables</h4>
+            </a>
+          </div>
+                
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/chargers/wall-chargers/desktop-charging-station-dual-usb.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_DesktopCharger.jpg" alt="Incipio Multi-Port Desktop Charging Station" /> 
+            	<h4>Desktop Charging Station</h4>
+            </a>
+          </div>
+          
+          <div class="col featuredItem">
+          	<a href="http://www.incipio.com/cases/iphone-cases/iphone-5-cases/iphone-5-performance-armband.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_Armband.jpg" alt="Incipio Performance Armband" /> 
+          		<h4>[Performance] Armbands</h4>
+          	</a>
+          </div>
+          
+          <div class="col featuredItem straggler">
+           	<a href="#">
+           		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_Surface-NylonSleeve.jpg" alt="Incipio Microsoft Surface Cases and Sleeves"/> 
+            	<h4>Microsoft Surface Pro 2 Cases</h4>
+            </a>
+          </div>
+          
+          <div class="col featuredItem straggler">
+          	<a href="http://www.incipio.com/chargers/offgrid-backup-battery-cases.html">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/featured_OFF_GRID-V3.jpg" /> 
+            	<h4>offGRID Backup Battery Cases</h4>
+           	</a>
+          </div>
+          
+        </div>
+      </section>
+      <!-- END FEATURED PRODUCTS -->
+      
+      
+      
+      <!-- ################ -->  
+      <!-- BEGIN WHAT'S NEW -->
+      <!-- ################ -->
+      
+      <section id="new">
+      	<div class="container">
+        	<h2><span>Whats new</span></h2>
+           
+          <!-- LEFT COLUMN -->      
+          <div class="left" id="newMain">
+          	<a href="#">
+          		<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/Whats-New_OCTANE.jpg" />
+            	<h4>Samsung Galaxy S5 OCTANE&trade; case</h4>
+            </a>
+          </div>
+          <!-- END LEFT COLUMN -->
+          
+          <!-- START RIGHT COLUMN -->      
+          <div class="right">
+          	
+          	<!-- RIGHT - TOP -->
+						<div class="newSide">
+              <a href="#">
+              	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/Whats-New_CAPTURE.jpg" />
+              	<h4>iPad Air Capture&trade; case</h4>
+              </a>
+            </div>
+            
+            <!-- RIGHT - BOTTOM -->        
+            <div class="newSide">
+              <a href="#">
+              	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/Whats-New_ETCHED.jpg" />
+              	<h4>iPhone 5/5S Etched Paisley feather&reg; SHINE</h4>
+              </a>
+            </div>
+                    
+          </div>
+          <!-- END RIGHT COLUMN -->
+       	</div>
+      </section>
+      <!-- END WHAT'S NEW -->  
+      
+      
+      
+      <!-- ########### -->  
+      <!-- BEGIN VIDEO -->
+      <!-- ########### -->
+      <div class="container"> 
+        <div id="wrapper_movie" class="home-page">
+        	<section class="video" id="section1">
+          	<video id="video" class="full-width" loop autoplay muted>
+            	<source type="video/mp4" src="video/1.mp4">
+              <source type="video/ogg" src="video/1.ogg"> 
+              <source type="video/webm" src="video/1.webm">
+            </video> 
+          </section>
+       	</div>
+      </div>
+      <!-- END VIDEO -->
+      
+        
+      
+      <!-- ################### -->          
+      <!-- BEGIN POPULAR ITEMS -->
+      <!-- ################### -->
+      
+      <section id="popular">
+      	<div class="container grid4">
+        <h2><span>Popular stuff</span></h2>
+        	<ul>
+					<?php
+					
+						$_popularProducts = Mage::getModel('catalog/category')
+						->load(307)
+						->getProductCollection();
+					
+					  $_popProducts = array();
+					  foreach($_popularProducts->getAllIds() as $_productId) {
+					
+						  $_product = Mage::getModel('catalog/product')->load($_productId);
+						
+						  $_popProducts[$_product->getName()] = array(	
+						  	'id' => $_productId,
+						    'url' => $_product->getProductUrl(),
+								'name' => $_product->getName(),
+								'short-desc' => $_product->getShortDescription(),
+								'price' => $_product->getPrice()
+						  );
+						}
+						$_popTrim = array_slice($_popProducts,0,12,true);
+					            
+						foreach($_popTrim as $_name => $_product):
+					?>
+		      
+			    <li class="popItem col">
+  					<a href="<?php echo $_product['url'] ?>">
+    					<img src="<?php echo $this->helper('catalog/image')->init(Mage::getModel('catalog/product')->load($_product['id']), 'image')->resize(168, 229) ?>" width="168" height="229" alt="<?php echo $_name ?>" />
+      				<h4 class="popItemTitle"><?php echo $_product['name']; ?> </h4>
+    				</a>
+    				<p class="popItemDescription"><?php echo $_product['short-desc']; ?></p>
+    				<p class="popItemPrice"><?php echo "$" . round($_product['price'], 2); ?></p>
+ 				</li>
+	        
+				<?php endforeach; ?> 
+						       
+          </ul>
+        </div>
+      </section>
+      <!-- END POPULAR ITEMS -->
+      
+      
+      
+  
+        
+      <link rel="stylesheet" href="nivo/themes/default/default.css" type="text/css" media="screen" /> 
+      <link rel="stylesheet" href="nivo/themes/bar/bar.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="nivo/nivo-slider.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="nivo/demo/style.css" type="text/css" media="screen" />
+
+	  <!-- SLIDER IMAGE PATH SWAP -->
+      <script>	
+			jQuery(document).ready(function() {
+			    function checkWidth() {
+			        var windowSize = jQuery(window).width();
+			
+			        if (windowSize >= 800) {
+			            replaceImagePaths("desktop");
+			        }
+			        else if (windowSize < 800 && windowSize > 500) {
+			            replaceImagePaths("tablet");
+			        }
+			        else {
+			            replaceImagePaths("phone");
+			        }
+			    }
+					function replaceImagePaths(resolution) {
+   	
+    			jQuery('img.slider_banner').each(function(){
+        		var imagePath = jQuery(this).attr('src');
+        		jQuery(this).attr('src', imagePath.replace(/phone|tablet|desktop/, resolution));
+   					});
+   				}	
+			    // ON LOAD
+			    checkWidth();
+			    
+			    // RESIZE
+			    jQuery(window).resize(checkWidth);
+			});
+			
+	</script>
+      <!-- END SLIDER IMAGE PATH SWAP -->
+        
+      <!-- HIDE MOVIE ON TABLET / PHONE && apply class to div #NEW to make up for no movie -->
+      <script>
+  			jQuery(document).ready(function(jQuery){
+  				var deviceAgent = navigator.userAgent.toLowerCase();
+  				var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+  					
+  				if (agentID) {
+  					jQuery('#wrapper_movie').hide();	
+  				 	jQuery( "section:nth-of-type(2)" ).addClass( "mobileStyling" );
+  				}
+  			});
+      </script>
+      
+      <!-- apply class to div #NEW to make up for no movie  on landscape or portraite IPAD ONLY-->
+      <script>    
+    		function detectIPadOrientation () {  
+    				if ( orientation == 0 ) {  
+    					jQuery( "section:nth-of-type(2)" ).removeClass( "mobileStylingL" );     
+    				}  			   
+    				else if ( orientation == 90 ) {  
+    					jQuery('#wrapper_movie').hide();	
+    					jQuery( "section:nth-of-type(2)" ).addClass( "mobileStylingL" );  
+    			    }  
+    			    else if ( orientation == -90 ) {  
+    					jQuery('#wrapper_movie').hide();	
+    					jQuery( "section:nth-of-type(2)" ).addClass( "mobileStylingL" );  
+    			    }  
+    				else if ( orientation == 180 ) {  
+    					jQuery( "section:nth-of-type(2)" ).removeClass( "mobileStylingL" );  
+    			   }  
+    			}
+    		window.onorientationchange = detectIPadOrientation;		
+	  </script>
+      <!-- END HIDE MOVIE ON TABLET / PHONE --> 
+       
+      <!-- HIDE MOVIE ON MAC FIREFOX --> 
+      <script>
+  			var FF = !(window.mozInnerScreenX == null);
+  			if(FF) {
+  				if(navigator.platform.indexOf('Mac')>=0)
+  				{
+  					jQuery('#wrapper_movie').hide();
+  					jQuery( "section:nth-of-type(2)" ).addClass( "macFF" );
+  				}
+  			}
+    </script>
+	<!-- END HIDE MOVIE ON MAC FIREFOX -->
+    
+    <script>
+  		window.onload = function () {
+  			var element = document.getElementById('video');
+  			element.muted = "muted";
+  		}
+    </script>
+
+
+ 

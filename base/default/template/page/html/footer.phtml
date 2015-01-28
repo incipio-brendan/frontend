@@ -1,0 +1,103 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+
+<div class="footer-container">
+    <div class="footer">        <footer> 
+        	<div class="container">
+                <div id="footerRow" class="grid4">
+                    <div class="col">
+                        <h3>Information</h3>
+                        <hr>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Distributors</a></li>
+                            <li><a href="#">Mailing</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col">
+                        <h3>Media</h3>
+                        <hr>
+                        <ul>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Resources</a></li>
+                            <li><a href="#">Lookbooks</a></li> 
+                        </ul>
+                    </div>
+                    
+                    <div class="col">
+                        <h3>Leagal</h3>
+                        <hr>
+                        <ul>
+                            <li><a href="#">Warranty</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">CA Privacy Rights</a></li>
+                            <li><a href="#">Terms</a></li> 
+                        </ul>
+                    </div>
+                    
+                    <div class="col">
+                        <h3>Support</h3>
+                        <hr>
+                        <ul>
+                            <li><a href="#">Stores</a></li>
+                            <li><a href="#">Contacts</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Returns</a></li> 
+                        </ul>
+                    </div>
+                 </div>
+             </div>
+             <div id="footerFoot">
+             	<img src="img/logoFooter.png">
+                <div class="container">
+                    <div class="left">
+                        <p>&copy; INCIPIO 2014</p>
+                    </div>
+                    <div class="right">
+                        <ul>
+                           <li><i class="fa fa-facebook"></i></li>
+                           <li><i class="fa fa-twitter"></i></li>
+                           <li><i class="fa fa-youtube"></i></li>
+                           <li><i class="fa fa-tumblr"></i></li>
+                           <li><i class="fa fa-instagram"></i></li>
+                        </ul>
+                    </div>
+                    
+                 </div>
+             </div>
+        </footer>
+        
+        <?php echo $this->getChildHtml() ?>
+        <p class="bugs"><?php echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php echo $this->__('Report All Bugs') ?></strong></a> <?php echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
+        <!-- <address><?php echo $this->getCopyright() ?></address> -->
+        <address><?php echo "Copyright " . time("Y") . " Incipio Technologies, Inc"; ?></address>
+    </div>
+</div>

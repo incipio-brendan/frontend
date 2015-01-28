@@ -1,0 +1,99 @@
+
+  <script>
+    jQuery('link[rel=stylesheet][href="http://www.incipio.com/skin/frontend/rwd/default/css/styles.css"]').remove();                 
+</script> 
+ 
+  
+    <link rel="stylesheet" href="http://dev.incipio.com/customePlugins/assets/style.css"/>
+
+    <script type="text/javascript" src="http://dev.incipio.com/customePlugins/assets/jquery-1.5.1.js"></script>
+ 
+    <link rel="stylesheet" href="http://dev.incipio.com/skin/frontend/rwd/default/css/splash.css"> 
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- END GOOGLE FONTS ADDITION -->
+
+
+    <!--<link rel="stylesheet" type="text/css" href="http://www.incipio.com/skin/frontend/rwd/default/css/splash.css">-->
+ 
+ <div class="splashWrapper" onclick="location.href='http://incipio.com/shop'">
+
+    <div id="overlay">
+        <a href="/shop" class="desk"><img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/logoSplashWhite.png"></a>
+        <a href="/shop" class="mob"><img src="http://d2zmgde9txxwg2.cloudfront.net/images/homepage/logoSplash.png"></a>
+        
+        <ul id="nav">
+            <li><a href="/shop" style="color:white;">SHOP</a></li>
+            <li><a href="http://youtube.com/incipiotv" style="color:white;">VIDEOS</a></li>
+            <li><a href="http://blog.incipio.com" style="color:white;">BLOG</a></li>
+        </ul>
+        <ul id="sm">
+            <li><a href="https://www.facebook.com/incipio" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/myincipio" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="http://www.youtube.com/user/IncipioTV" target="_blank"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="http://www.pinterest.com/incipio/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+            <li><a href="http://instagram.com/incipio#" target="_blank"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>  
+  
+ <style>
+ * {
+  margin:0;
+  padding: 0;
+ }
+ #nav {
+  max-width: 250px;
+ }
+ html, body {
+  overflow: hidden!important;
+  background-color: black;
+ }
+ .splashWrapper { 
+      background-repeat: no-repeat; 
+      background-size: contain;
+ }
+ @media screen and (max-width:321px) {
+  .splashWrapper {
+    background-image: url("https://d2zmgde9txxwg2.cloudfront.net/images/splash/320CM.jpg");
+    background-size: 100% 100%;
+ }
+}
+@media screen and (max-width:414px) {
+  .splashWrapper {
+    background-image: url("https://d2zmgde9txxwg2.cloudfront.net/images/splash/414CM.jpg");
+    background-size: cover;
+ }
+}
+@media screen and (min-width: 415px) {
+    .splashWrapper {
+     background-image: url("https://d2zmgde9txxwg2.cloudfront.net/images/splash/800CM.jpg");
+   }
+}
+@media screen and (min-width: 801px) {
+    .splashWrapper {
+      background-image: url("https://d2zmgde9txxwg2.cloudfront.net/images/splash/1280CM.jpg");
+   }
+}
+@media screen and (min-width: 1281px) {
+    .splashWrapper {
+      background-image: url("https://d2zmgde9txxwg2.cloudfront.net/images/splash/1920CM.jpg");
+   }
+}
+ 
+#overlay {
+    position: absolute;
+    width: 300px;
+    height: 129px;
+    border-radius: 0px 0px 31px 0px !important;
+    left: 0px;
+    top: 0px !important;
+    background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.7);
+    z-index: 2147483647;
+}
+.std p {
+    margin: 0!important;
+}
+.fa {
+    font-size: 21px;
+}
+ </style>
+

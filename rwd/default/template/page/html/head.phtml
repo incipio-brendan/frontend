@@ -1,0 +1,89 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+
+<script type="text/javascript">
+var uri = window.location.toString();
+if (uri.indexOf("?") > 0) {
+    var clean_uri = uri.substring(0, uri.indexOf("?"));
+    window.history.replaceState({}, document.title, clean_uri);
+}
+</script>
+
+
+<title>
+	<?php 
+		$title = $this->getTitle();
+
+		
+			if(strpos($title, '| Incipio') !== false) {
+				echo $this->getTitle();
+			} else {	
+				echo $this->getTitle() . " | Incipio";
+			}
+	?>
+</title>
+
+
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
+
+<!-- BING WEBMASTER VALIDATION -->
+<meta name="msvalidate.01" content="B2F2CDA731C57CB85B749EE11C2E4052" />
+
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>  
+
+<!-- GOOGLE FONTS ADDITION -->
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Francois+One|Fjalla+One|Anton|Lato:100|Quicksand"></link>
+<!-- END GOOGLE FONTS ADDITION -->
+
+<!-- FONT AWSOME!:p  -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+ <!-- END GOOGLE FONTS ADDITION -->
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+

@@ -1,0 +1,693 @@
+<?php
+session_start();
+
+?>
+
+<script type="text/javascript" src="http://ncpo.cc/counterfeit/js/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+<script type="text/javascript" src="http://ncpo.cc/counterfeit/js/validation/validate_1.11.js"></script>
+ 
+ <script>
+$(window).load(function(){
+	//alert()
+	
+	$("#DateOfDiscovery").datepicker();
+	
+ $('#counterfeit').validate({
+	
+	/* errorClass : "make-red",*/
+	
+  rules: {
+    "LocationType": {
+         required: true
+     },
+	 "ProductName":{
+		required:true
+	 },
+	 "locationtype_other":{
+		 required:true
+	 }
+	  
+  },
+  messages: {
+    "LocationType": {
+         required: "Please Select the Location"
+     
+     },
+	 "ProductName": {
+         required: "Please enter the product name"
+     
+     },
+	  "locationtype_other":{
+		 required: "Please enter the value"
+	 }
+	 
+  }
+   
+});
+
+$("#selectbasic").on('change',function()
+{
+//alert()	
+if($(this).val() == "Other Location" || $(this).val() == "Other Website" )
+{
+  $("#locationtype_other").html('<div class="form-group"><label class="col-md-4 control-label" for="textinput">*'+$(this).val()+'</label>    <div class="col-md-3">  <input id="textfield" name="locationtype_other" type="text" placeholder="" class="form-control input-md"></div></div>');	
+}
+else
+{
+	 $("#locationtype_other").html('');
+}
+
+})
+});
+ </script>
+ 
+<!-- <script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+$(".date-picker").datepicker();
+
+$(".date-picker").on("change", function () {
+    var id = $(this).attr("id");
+    var val = $("label[for='" + id + "']").text();
+    $("#msg").text(val + " changed");
+});
+});//]]>  
+
+</script>-->
+<script>
+	var increaseFile=2,filecheck=1,filesize=0;
+	function getFileName(fileobj)
+	{
+
+checkfiles();
+	if(	filesize > 3204448256 )
+{
+	alert('Your files contains more than 3GB..please upload upto 3GB')
+	
+	
+}
+	if(filecheck == 2)
+	{
+	$("#div-file-"+$("#"+fileobj.id+"").attr('inc')).hide();
+	
+	$("#file_labels_div").append('<div id="div-file-'+increaseFile+'"><label for="input-file-'+increaseFile+'"><img style="vertical-align:middle;"  id="fileupload-attachments" src="http://incipio.com/images/warrantyform/RequestForm-AddMoreFiles_btn.png" /></label><input id="input-file-'+increaseFile+'" inc="'+increaseFile+'" name="projectfiles[]" onchange="getFileName(this);"  style="display:none;" type="file"/></div>');
+	increaseFile++;
+}
+else
+	{
+		
+	$("#file_labels_div").html('<div id="all-filenames"></div><div id="div-file-1"><label for="input-file-1"><img  id="fileupload-attachments" src="http://incipio.com/images/warrantyform/RequestForm-AddFiles_btn.png" style="vertical-align:middle;" /></label><input id="input-file-1" inc="1" name="projectfiles[]" onchange="getFileName(this);"  style="display:none;" type="file"/></div>');
+	increaseFile=2;
+	filesize=0;
+	}
+
+
+}
+function checkfiles()
+{
+ 	
+		file_names='';
+		filesize=0;
+		filecheck=1
+		for(fcheck=0;fcheck<increaseFile;fcheck++)
+		{
+			if ($('#div-file-'+fcheck).length > 0)
+			 {
+   
+					var x = document.getElementById ("input-file-"+fcheck);
+					var txt = "";
+					myFile="input-file-"+fcheck+"";
+					if ('files' in x) {
+						//alert(x.files.length)
+					    if (x.files.length == 0) {
+					        txt = "Select one or more files.";
+					    } else {
+					    	
+					    	   filecheck=2;
+					    	        for (var i = 0; i < x.files.length; i++) {
+					          
+					            var file = x.files[i];
+					            if ('name' in file) {
+					             
+					                if(filesize > 3204448256 )
+					                {
+					                	$("#all-filenames").html(file_names);
+					                	//alert("You have exceeded maximum allowed size 3GB")
+					                	return true;
+					                }
+                                    
+                                     if ('size' in file) {
+					                  var sizeInMB = (file.size / (1024*1024)).toFixed(2);
+					                 }
+                                    
+                                
+					                file_names+='<p  id="singlefile-'+fcheck+'">'+file.name+' <img id="closebtn-'+fcheck+'"  src="http://incipio.com/images/warrantyform/x-close_btn.png" style="cursor:pointer;/*display:none;*/vertical-align: bottom;padding-right: 3px;float:left;" onclick=deletefile("singlefile-'+fcheck+'","#div-file-'+fcheck+'") /> <br></p>';
+					            }
+					            if ('size' in file) {
+					               // txt += "size: " + file.size + " bytes <br>";
+					            filesize+=file.size
+					            }
+					        }
+					    }
+					} 
+					
+					
+					$("#all-filenames").html(file_names)
+			
+					
+			}
+		}
+
+		var sizeInMB = (filesize / (1024*1024)).toFixed(2);
+				total_file_size="- Total - ("+sizeInMB+"MB)";
+
+				//$("#all-filenames").append(total_file_size)	
+		
+		
+}
+
+
+function deletefile(filename,divname)
+{
+//	alert('file name is'+filename+"divname"+divname)
+	$('#'+filename).remove();
+	$(divname).remove();
+	
+	checkfiles();
+if(filecheck == 1)
+{
+	$("#file_labels_div").html('<div id="all-filenames"></div><div id="div-file-1"><label for="input-file-1"><img style="vertical-align:middle;" id="fileupload-attachments" src="http://incipio.com/images/warrantyform/RequestForm-AddFiles_btn.png" /></label><input id="input-file-1" inc="1" name="projectfiles[]" onchange="getFileName(this);"  style="display:none;" type="file"/></div>');
+	increaseFile=2;
+	filesize=0;
+}
+	
+}
+ function validatefiles()
+ {
+ 	filesize=0;
+ 	filesize=0;
+ 			for(fcheck=0;fcheck<increaseFile;fcheck++)
+		{
+			if ($('#div-file-'+fcheck).length > 0)
+			 {
+   
+					var x = document.getElementById ("input-file-"+fcheck);
+					var txt = "";
+					myFile="input-file-"+fcheck+"";
+					if ('files' in x) {
+					    if (x.files.length == 0) {
+					        txt = "Select one or more files.";
+					    } else {
+					    	
+					    	   filecheck=2;
+					    	        for (var i = 0; i < x.files.length; i++) {
+					            //txt += "<br><strong>" + (i+1) + ". file</strong><br>";
+					            var file = x.files[i];
+					            
+					            if ('size' in file) {
+					               // txt += "size: " + file.size + " bytes <br>";
+					            filesize+=file.size
+					            }
+					        }
+					    }
+					} 
+					
+				
+					
+			}
+		}	
+//		alert(filesize)
+		if(filesize > 3204448256)
+		{
+			alert("You can upload maxmum upto 3GB")
+			return false;
+		}
+ 	
+ //return false;	
+}
+</script>
+ <style>
+ label.error{
+ color:red;
+ }
+  input.error{
+ border-color:red;
+ }
+ select.error{
+ border-color:red;
+ }
+ </style>
+ 
+ <!--########################## -->
+ <!-- UPDATED STYLES - BRENDAN  -->
+ <!--########################## -->
+ <style>
+ .main {
+	 margin-top:40px;
+ }
+ .col-main {
+     padding-top: 48px !important;
+ }
+ h1 {
+	 display:none;
+ }
+ #intro-copy {
+	 width:100%;
+	 margin-top: 40px;
+	 margin-bottom: 40px;
+	 color: #636363;
+	 font-size: 15px;
+	 line-height: 1.5;
+	 text-transform: uppercase !important;
+ }
+ #icon-block {
+	 width:100%;
+	 margin-bottom: 35px;
+ }
+ #icon-block > *{
+	 vertical-align: middle;
+ }
+ #copy {
+	 width:80%;
+	 display: inline-block;
+	 margin-left:4%;
+	 color: #636363;
+	 font-size: 15px;
+	 line-height: 1.5;
+	 text-transform: uppercase !important;
+ }
+ #icon-block img {
+	 max-width: 110px;
+	 max-height: 110px;
+	 display: inline-block;
+ }
+ #closing-copy {
+	 width:100%;
+	 margin-top: 40px;
+	 margin-bottom: 40px;
+	 color: #636363;
+	 font-size: 18px;
+	 line-height: 1.5;
+ }
+ fieldset {
+	 margin: 0px;
+	 padding: 0px;
+	 border: 0px none;
+	 max-width: 980px;
+	 width: 60%;
+ }
+ #form-header {
+	 margin-bottom:30px;
+ }
+ #form-header h2 {
+	 font-size: 32px;
+	 color:#000;
+	 margin:0px;
+ }
+form h3 {
+	font-size:24px;
+	color:#000;
+	text-transform: uppercase;
+}
+ select {
+	 margin-bottom: 10px;
+ }
+ input {
+	 width:100% !important;
+	 margin-bottom:10px;
+ }
+ input[type="submit"] {
+     cursor: pointer;
+	 height:30px;
+	 width: 35%;
+	 float:right;
+ }
+ textarea {
+	 max-width:980px;
+	 width:100%;
+	 margin-bottom:10px;
+	 border-radius: 0 !important;
+ }
+ label {
+	 display: inline-block;
+	 font-size: 14px;
+	 font-family: "Roboto Condensed",arial,sans-serif;
+	 font-weight: 300;
+	 -moz-user-select: none;
+	 text-transform: uppercase;
+	 margin-bottom:2px;
+ }
+ 
+@media (max-width: 790px) {
+	.page h1 {
+		display:none;
+	}
+    .col-main {
+        padding-top: 0px !important;
+    }
+	#intro-copy {
+		width:100%;
+		margin:20px auto 30px auto;
+	}
+	#copy {
+		margin-left: 0px;
+		width: 100%;
+	}
+    #icon-block {
+   	 width:100%;
+   	 margin-bottom: 20px;
+    }
+    #icon-block img {
+   	 max-width: 110px;
+   	 max-height: 110px;
+   	 display: inline-block;
+	 margin-bottom:2%;
+    }
+    fieldset {
+   	 margin: 0px;
+   	 padding: 0px;
+   	 border: 0px none;
+   	 max-width: 980px;
+   	 width: 100%;
+    }
+	#form-header h2 {
+		margin: 0px 0px 6px 0px;
+	}
+	form h3 {
+		font-size:24px;
+		color:#000;
+		text-transform: uppercase;
+	}
+	select {
+		width: 30%;
+		height: 30px;
+	}
+    input {
+		height: 40px !important;
+    }
+    textarea {
+   	 max-width:980px;
+   	 width:100%;
+    }
+    label {
+   	 display: inline-block;
+   	 font-size: 15px;
+   	 font-family: "Roboto Condensed",arial,sans-serif;
+   	 font-weight: 300;
+   	 -moz-user-select: none;
+   	 text-transform: uppercase;
+	 margin-bottom:4px;
+    }
+}
+
+.recaptchatable {
+line-height: 0 !important;
+}
+ </style>
+ 
+
+<?php
+if($_GET['submitted'] == 'YES')
+{
+echo "<script>alert('You have successfully submitted the form.');</script>";
+}
+?>
+
+<!-- ########### -->
+<!-- HERO BANNER -->
+<!-- ########### -->
+<div id="hero-banner">
+	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/Counter-Banner-V2.jpg" />
+</div>
+
+<!-- ############## -->
+<!-- CONTENT BLOCKS -->
+<!-- ############## -->
+<div id="intro-copy">
+	Do not be fooled by counterfeit cases. Our products are made from high quality materials designed to protect your device. Counterfeit products do not offer this same quality and can discolor, peel, and crack very easily. Counterfeiters use low-quality materials that do not provide the proper durability and protection your valuable device deserves. We recommend that you check the case for any indication of poor design. The case should feel like it is a natural fit for your device and be easily installed.
+</div>
+<div id="icon-block">
+	<img style="width:" src="http://d2zmgde9txxwg2.cloudfront.net/images/counterfeit/Icon-Authorized_Retailer.jpg" />
+	<div id="copy"><span style="font-weight: bold;">BUY FROM TRUSTED SOURCES.</span>   We suggest only buying from authorized resellers. That way the product can easily be validated for authenticity and is guaranteed to be covered by our warranty. Products purchased elsewhere do not qualify for the Incipio<sup>&reg;</sup> warranty.</div> 
+</div>
+<div id="icon-block">
+	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/counterfeit/Icon-Check_Packaging.jpg" />
+	<div id="copy"><span style="font-weight: bold;">CHECK THE PACKAGING.</span>   Beware of products that are missing their original retail packaging or come in damaged boxes.</div>
+</div>
+<div id="icon-block">
+	<img src="http://d2zmgde9txxwg2.cloudfront.net/images/counterfeit/Icon-Check_Product.jpg" />
+	<div id="copy"><span style="font-weight: bold;">CHECK THE PRODUCT.</span>   We go to great lengths to assure quality. Cases with rugged edges, sharp corners, and rough finishes are all red flags. If something feels off about it, it more than likely is not an authentic Incipio<sup>&reg;</sup> product.</div>
+</div>
+<hr>
+<div id="closing-copy">
+	We are doing our best to keep counterfeit products off the market. If you think you might have seen or purchased a counterfeit case, please feel free to contact us.
+</div>
+
+<!-- ################ -->
+<!-- COUNTERFEIT FORM -->
+<!-- ################ -->
+<script>
+var msg;
+function checkCaptcha()
+{
+//	alert($('#recaptcha_response_field').val());
+	//alert($('#recaptcha_challenge_field').val());
+	
+	//alert($('#counterfeit').valid())
+	if($('#counterfeit').valid() && $('#recaptcha_response_field').val() != '' )
+	{
+		$.ajax({
+	  type: "POST",
+	  async:false,
+	  url: "/recaptcha/ajaxvalidate.php",
+	  data: { recaptcha_challenge_field: $('#recaptcha_challenge_field').val(), recaptcha_response_field: $('#recaptcha_response_field').val() }
+	})
+	  .done(function( msg ) {
+		  window.msg=msg;
+		if(msg == 'success')
+		{
+		return true;
+				//status=msg;
+		}
+		else
+			{
+				alert( msg );
+				Recaptcha.reload();
+				$('#recaptcha_response_field').focus()
+			}
+		
+		
+	  });
+	}
+	else
+	 {
+			 if($('#counterfeit').valid())
+			  {
+				  alert('Please enter Captcha Field');
+				  $('#recaptcha_response_field').focus()
+			  }
+			  
+		 return false;
+	 }
+	 
+	if(window.msg == 'success')
+	return true; 
+	else
+	return false;
+	
+	
+
+}
+</script>
+<form class="form-horizontal" action="http://ncpo.cc/counterfeit/register.php" method="post" onsubmit="return checkCaptcha()" enctype="multipart/form-data" id="counterfeit">
+<fieldset>
+
+<div id="form-header">
+	<h2 id="form-header">REPORT A COUNTERFEIT</h2>
+	<span style="color: red;">* = Required Field</span>
+</div>	
+<h3>STORE INFO</h3>
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Location Type<span style="color:red;"> *</span></label>
+  <div class="col-md-3">
+    <select id="selectbasic" name="LocationType" class="form-control">
+     <option value=''>STORE</option>
+      <option>Amazon</option>
+<option>eBay</option>
+<option>Kiosk</option>
+<option>Other Location</option>
+<option>Other Website</option>
+<option>Retail Store</option>
+    </select>
+  </div>
+</div>
+
+<!-- Text input-->
+<span id="locationtype_other">
+</span>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Product Name<span style="color:red;"> *</span></label>  
+  <div class="col-md-3">
+  <input id="ProductName" name="ProductName" type="text" placeholder="DualPro&reg;, Stowaway&trade;, OFFGRID&trade;, etc." class="form-control input-md">
+   </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Store name or website name</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="StoreName" type="text" placeholder="Store/Website name..." class="form-control input-md">
+   </div>
+</div>
+
+<div class="form-group">
+ <label class="col-md-4 control-label" style="font-weight:bold;margin-top:20px;"><h3> Address </h3></label>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Street Address</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="address" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">City</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="City" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">State/Province</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="State" type="text" placeholder="" class="form-control input-md">
+   </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Zip/Postal Code</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="Zip" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Country</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="Country" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Website URL</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="WebsiteUrl" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput"> Date of Discovery</label>  
+  <div class="col-md-3">
+  <input id="DateOfDiscovery" name="DateOfDiscovery" type="text" placeholder="Click to select Date..." class="form-control input-md">
+  </div>
+</div>
+
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">Comments (Why do you believe this product is counterfeit?)</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="textarea" name="Comments" placeholder='Comments...'></textarea>
+  </div>
+</div>
+
+
+<!-- Image Upload -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textarea">Image/File Upload</label>
+  <div class="col-md-4">                     
+   <span class="form-field">       
+     
+     <div class="image-upload">
+    
+    <span id="file_labels_div">
+    		<div id="all-filenames">
+	    	</div>
+    	<div id="div-file-1">
+    		    <label for="input-file-1">
+    	
+      <!-- Send Up to 3GB <br/>--><img style="vertical-align:middle;" id="fileupload-attachments" src="http://incipio.com/images/warrantyform/RequestForm-AddFiles_btn.png" />
+    </label>
+
+    <input id="input-file-1" name="projectfiles[]" inc="1" onchange="getFileName(this);"  style="display:none;" type="file"/>
+    
+    	</div>
+    	
+    	
+    </span>
+
+    
+</div>
+</span>
+  </div>
+</div>
+              
+<div class="form-group">
+ <label class="col-md-4 control-label" style="font-weight:bold;margin-top:20px;"><h3>Contact Info </h3></label>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Name</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="Name" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Email</label>  
+  <div class="col-md-3">
+  <input id="textinput" name="Email" type="text" placeholder="" class="form-control input-md">
+  </div>
+</div>
+
+<div class="form-group">
+
+<?php
+
+require_once('recaptcha/recaptchalib.php');
+$publickey = "6Ledd8cSAAAAAP7LcFHD876DMLkn_z7rcUCc2G9p"; 
+echo recaptcha_get_html($publickey);
+?>
+</div> 
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <!--<button id="singlebutton" type="submit" name="singlebutton" class="btn btn-primary">Submit</button>-->
+  <input id="singlebutton" type="submit" name="submit" class="btn btn-primary" value='Submit'/>
+  </div>
+</div>
+
+</fieldset>
+</form>
